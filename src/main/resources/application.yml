@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: local
+project:
+  name: "RTSP player & Controller"
+  version:
+    application: 1.0
+    springboot: 3.2.4
+    java: 17
+logging:
+  config: classpath:logback/logback-spring.xml
+---
+spring:
+  config:
+    activate:
+      on-profile: local
