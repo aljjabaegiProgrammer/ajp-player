@@ -193,13 +193,15 @@ public class PlayerApplication extends JFrame {
     }
 
     /**
-     * multi media player popup 표출 메서드
+     * multi media player popup 표출 메서드<br />
+     * 이미 생성된 MultiMediaPlayer 일 경우 정상 cctv combobox 데이터 리로드 기능 추가
      */
     public void showMultiMediaPlayer() {
         if (this.multiMediaPlayer == null) {
             this.multiMediaPlayer = new MultiMediaPlayer();
         }
         this.multiMediaPlayer.setVisible(true);
+        this.multiMediaPlayer.reloadNormalCctvCombos();
     }
 
     /**

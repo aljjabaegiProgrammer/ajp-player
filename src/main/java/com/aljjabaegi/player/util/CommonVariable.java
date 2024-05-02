@@ -1,12 +1,9 @@
 package com.aljjabaegi.player.util;
 
-import com.aljjabaegi.player.PlayerApplication;
 import com.aljjabaegi.player.component.CustomTable;
 import com.aljjabaegi.player.component.CustomTitleBar;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.util.regex.Pattern;
 
 /**

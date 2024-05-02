@@ -27,7 +27,6 @@ public class CustomMediaPlayer extends EmbeddedMediaPlayerComponent {
     private final JFrame container;
     private final EmbeddedMediaPlayer player;
     private final JLabel initialImageLabel;
-
     private final JSplitPane splitPane;
 
     public CustomMediaPlayer(JFrame container, JSplitPane splitPane) {
