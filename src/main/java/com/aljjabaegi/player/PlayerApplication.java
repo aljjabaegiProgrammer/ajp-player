@@ -8,6 +8,8 @@ import com.aljjabaegi.player.component.popup.Shortcut;
 import com.aljjabaegi.player.config.MessageConfig;
 import com.aljjabaegi.player.service.cctv.CctvService;
 import com.aljjabaegi.player.service.cctv.record.CctvDto;
+import com.aljjabaegi.player.service.code.CodeService;
+import com.aljjabaegi.player.service.code.record.CodeDto;
 import com.aljjabaegi.player.util.CommonVariable;
 import com.aljjabaegi.player.util.Utils;
 import com.aljjabaegi.player.util.setting.SettingUtil;
@@ -44,6 +46,7 @@ public class PlayerApplication extends JFrame {
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayerApplication.class);
     private final MessageConfig messageConfig;
     private final CctvService cctvService;
+    private final CodeService codeService;
     public Settings settings;
     public Shortcut shortcut;
     public About about;
@@ -62,11 +65,12 @@ public class PlayerApplication extends JFrame {
     private CustomTable cctvTable;
     private ControlPanel controlPanel;
 
-    public PlayerApplication(MessageConfig messageConfig, CctvService cctvService) {
+    public PlayerApplication(MessageConfig messageConfig, CctvService cctvService, CodeService codeService) {
         FlatDarculaLaf.setup(); /*UI 적용*/
         SettingUtil.checkSettingFiles();
         setTitle("CCTV Controller");
         this.cctvService = cctvService;
+        this.codeService = codeService;
         this.messageConfig = messageConfig;
         SwingUtilities.invokeLater(this::initGUI);
     }
@@ -108,6 +112,9 @@ public class PlayerApplication extends JFrame {
             this.loadingBar = new LoadingBar(this);
             this.mediaPlayer = new CustomMediaPlayer(this, splitPane);
             // add popup frame
+            // get cctv type
+            List<CodeDto> codeList = codeService.getCodeList();
+            SettingUtil.setCctvTypeMap(codeList);
             this.settings = new Settings(this);
             this.shortcut = new Shortcut(this);
             this.about = new About(this);

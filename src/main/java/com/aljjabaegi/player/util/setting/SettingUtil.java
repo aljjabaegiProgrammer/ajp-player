@@ -1,5 +1,6 @@
 package com.aljjabaegi.player.util.setting;
 
+import com.aljjabaegi.player.service.code.record.CodeDto;
 import com.aljjabaegi.player.util.CommonVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,23 +9,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class SettingUtil {
     public static final Properties settingProperties = new Properties();
     public static final Set<String> controllableType = Set.of("01", "03");
-    public static final Map<String, String> cctvTypeMap = new HashMap<>() {
-        {
-            put("01", "CCTV");
-            put("02", "IP 카메라");
-            put("03", "교차로감시");
-            put("04", "VMS");
-            put("05", "스마트카메라");
-        }
-    };
+    public static final Map<String, String> cctvTypeMap = new HashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingUtil.class);
     private static File settingFile;
 
@@ -152,5 +142,18 @@ public class SettingUtil {
             }
         }
         return "";
+    }
+
+    /**
+     * 코드 테이블에 저장된 코드 값으로 cctv type setting
+     *
+     * @author GEONLEE
+     * @since 2024-06-17
+     */
+    public static void setCctvTypeMap(List<CodeDto> list) {
+        cctvTypeMap.clear();
+        list.forEach(cctvDto -> {
+            cctvTypeMap.put(cctvDto.codeId(), cctvDto.codeName());
+        });
     }
 }
